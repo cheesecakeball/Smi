@@ -598,6 +598,7 @@ ClpModel * SmiScnModel::loadQuadraticSolverData()
 }
 */
 
+
 //Christian: Generates Deterministic Equivalent (Big Matrix)
 OsiSolverInterface *
 SmiScnModel::loadOsiSolverData()
@@ -1360,6 +1361,19 @@ SmiScnModel::readSmps(const char *c, SmiCoreCombineRule *r)
     {
         delete smiSmpsIO;
         return -1;
+    }
+
+    // read quadratic objective function
+
+    SmiQuadraticData *Qdata;
+
+    CoinBigIndex *start;
+    int *column=NULL;
+    double *elements=NULL;
+    int checkSymmetry=2;
+
+    if (smiSmpsIO->readQuadraticMps(NULL, start, column, elements, checkSymmetry)==1){
+        
     }
 
     SmiCoreData *smiCore = NULL;
